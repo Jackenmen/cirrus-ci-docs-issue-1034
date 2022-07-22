@@ -9,6 +9,7 @@ example_task:
         memory: 512Mi
         env:
           MYSQL_ROOT_PASSWORD: ""
+          MYSQL_ALLOW_EMPTY_PASSWORD: "1"
   script:
     - apt update
     - apt install -y curl net-tools
