@@ -1,5 +1,5 @@
 example_task:
-  arm_container:
+  container:
     image: docker:latest
     additional_containers:
       - name: dockerdaemon
