@@ -1,15 +1,16 @@
 example_task:
   arm_container:
-    image: docker:latest
+    image: ubuntu:latest
     additional_containers:
-      - name: dockerdaemon
-        privileged: true
-        cpu: 4
-        memory: 3500Mb
-        image: docker:dind
-        port: 2375
+      - name: mysql
+        image: mysql:latest
+        port: 3306
+        cpu: 1.0
+        memory: 512Mi
         env:
-          DOCKER_DRIVER: overlay2
-  env:
-    DOCKER_HOST: tcp://localhost:2375
-  script: docker run ubuntu echo hello
+          MYSQL_ROOT_PASSWORD: ""
+  script:
+    - apt update
+    - apt install -y curl net-tools
+    - netstat -tulpn
+    - curl http://localhost:3306
