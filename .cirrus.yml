@@ -5,14 +5,12 @@ example_task:
       - name: dockerdaemon
         privileged: true
         image: docker:dind
-        ports:
-          - 2375
-          - 2376
+        port: 2375
         env:
           DOCKER_DRIVER: overlay2
           DOCKER_TLS_CERTDIR: ""
   env:
-    DOCKER_HOST: tcp://localhost:2376
+    DOCKER_HOST: tcp://localhost:2375
   script:
     - netstat -tulpn
     - docker run ubuntu echo hello
