@@ -4,8 +4,6 @@ example_task:
     additional_containers:
       - name: dockerdaemon
         privileged: true
-        cpu: 4
-        memory: 3500Mb
         image: docker:dind
         port: 2375
         env:
