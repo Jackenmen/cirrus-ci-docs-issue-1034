@@ -1,16 +1,38 @@
 example_task:
-  arm_container:
+  container:
     image: docker:latest
+    kvm: true
     additional_containers:
       - name: dockerdaemon
-        privileged: true
         image: docker:dind
         port: 2375
+        cpu: 2
+        memory: 4G
         env:
           DOCKER_DRIVER: overlay2
           DOCKER_TLS_CERTDIR: ""
   env:
     DOCKER_HOST: tcp://localhost:2375
   script:
+    - sleep 30  # allow docker to start
+    - netstat -tulpn
+    - docker run ubuntu echo hello
+
+  arm_container:
+    image: docker:latest
+    kvm: true
+    additional_containers:
+      - name: dockerdaemon
+        image: docker:dind
+        port: 2375
+        cpu: 2
+        memory: 4G
+        env:
+          DOCKER_DRIVER: overlay2
+          DOCKER_TLS_CERTDIR: ""
+  env:
+    DOCKER_HOST: tcp://localhost:2375
+  script:
+    - sleep 30  # allow docker to start
     - netstat -tulpn
     - docker run ubuntu echo hello
